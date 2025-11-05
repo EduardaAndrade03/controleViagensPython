@@ -28,15 +28,21 @@ def  buscar_motorista(listaViagens):
     return 
 
 def viagem_mais_cara(listaViagens):
-    maiorgasto=listaViagens[0]["gasto"]
-    for v in listaViagens:
-        if v["gasto"]>maiorgasto:
-            maiorgasto=v["gasto"]
+    if len(listaViagens)==1:
             mgviagem={
-                "viagem": v["destino"],
-                "valor": maiorgasto
+                "viagem": listaViagens[0]["destino"],
+                "valor": listaViagens[0]["gasto"]
             }
-
+            return f"há apenas uma viagem registrada: {mgviagem}"
+    else:
+        maiorgasto=listaViagens[0]["gasto"]
+        for v in listaViagens:
+            if v["gasto"]>maiorgasto:
+                maiorgasto=v["gasto"]
+                mgviagem={
+                    "viagem": v["destino"],
+                    "valor": maiorgasto
+                }
     return mgviagem
 
 def media_consumo(listaViagens):
@@ -44,4 +50,4 @@ def media_consumo(listaViagens):
     for v in listaViagens:
         somaconsumos+=v["consumo"]
     mediaconsumos=somaconsumos/len(listaViagens)
-    return mediaconsumos
+    return f"A média geral de consumo entre todas as viagens é: {mediaconsumos}"
